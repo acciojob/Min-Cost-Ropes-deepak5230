@@ -1,60 +1,23 @@
-function mincost(arr)
-{ 
-	  const heapify = () => {
-    for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
-      heapifyDown(i);
-    }
-  };
+function mincost(arr){
+	    total_cost = 0
 
-  // Helper function to maintain the heap property while pushing down a node
-  const heapifyDown = (index) => {
-    let smallest = index;
-    const left = 2 * index + 1;
-    const right = 2 * index + 2;
-    
-    if (left < arr.length && arr[left] < arr[smallest]) {
-      smallest = left;
-    }
-    
-    if (right < arr.length && arr[right] < arr[smallest]) {
-      smallest = right;
-    }
-    
-    if (smallest !== index) {
-      [arr[index], arr[smallest]] = [arr[smallest], arr[index]];
-      heapifyDown(smallest);
-    }
-  };
+    while len(arr) > 1:
+        # Sort the array
+        arr.sort()
 
-  // Initialize the total cost
-  let totalCost = 0;
+        # Combine the two smallest elements
+        first = arr.pop(0)
+        second = arr.pop(0)
 
-  // Build the min-heap
-  heapify();
+        cost = first + second
+        total_cost += cost
 
-  // Continue until there is only one rope left
-  while (arr.length > 1) {
-    // Remove the two shortest ropes from the heap
-    const rope1 = arr.shift();
-    const rope2 = arr.shift();
+        # Add the combined rope back to the list
+        arr.append(cost)
 
-    // Connect the two ropes and add their lengths to the total cost
-    const connectedRope = rope1 + rope2;
-    totalCost += connectedRope;
+    return total_cost
 
-    // Add the length of the connected rope back to the heap
-    arr.push(connectedRope);
-    heapify();
-  }
-
-  return totalCost;
 }
 
-
-	
-//write your code here
-// return the min cost
-  
-}
 
 module.exports=mincost;
